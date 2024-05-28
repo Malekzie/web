@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <link rel="stylesheet" href="/output.css">
+     <link href="/custom-scrollbar.css" rel="stylesheet">
+</head>
+<body class="font-mono">
+     <nav class="flex justify-around">
+          <div class="z-50 p-2 mr-0 lg:hidden">
+               <ion-icon id="menu-open" name="menu-outline" size="large" class="text-blue-500"></ion-icon>
+               <ion-icon id="menu-closed" name="close-outline" class="hidden text-blue-500" size="large"></ion-icon>
+          </div>
+          <div id="navItems" class="h-screen w-[30%] bg-black text-white text-center pt-10 hidden absolute peer">
+               <div class="flex flex-col gap-5 text-lg">
+                    <a href="/">Home</a>
+                    <a href="/dragons">Dragons</a>
+                    <a href="/contact">Contact</a>
+               </div>
+          </div>
+          <div class="hidden w-full py-5 lg:flex lg:justify-between lg:pr-5">
+               <div class="hidden lg:block"></div>
+               <p class="text-3xl font-bold font-medieval">Dragons Sanctuary</p>
+               <div class="flex gap-10 text-2xl">
+                    <a class="transition-all hover:scale-110" href="/">Home</a>
+                    <a class="transition-all hover:scale-110" href="">Dragons</a>
+                    <a class="transition-all hover:scale-110" href="">Contact</a>
+               </div>
+          </div>
+     </nav>
+
+     <main class="flex justify-between">
+
+          <img src="/img/pillar.png" alt="" class="w-[20%] h-auto">
+          <section class="h-full w-[60%] border border-black rounded-xl bg-gradient-to-b from-[#ffec9e] via-[#ffdd8a] to-[#e1ad6d]">
+               <div class="h-[89vh] m-3 font-medieval overflow-y-auto scrollbar-custom">
+                    <p class="h-[89vh]">Scroll inside this container. The scroll will be trapped here.</p>
+                    <p>More content...</p>
+                    <p>Even more content...</p>
+                    <p>Keep scrolling...</p>
+                    <p>Even more content...</p>
+                    <p>Keep scrolling...</p>
+                    <p>Even more content...</p>
+                    <p>Keep scrolling...</p>
+                    <p>Even more content...</p>
+                    <p>Keep scrolling...</p>
+                    <p>Even more content...</p>
+                    <p>Keep scrolling...</p>
+                    <p>Even more content...</p>
+                    <p>Keep scrolling...</p>
+                    <p>Even more content...</p>
+                    <p>Keep scrolling...</p>
+               </di>
+               
+          </section>
+          <img src="/img/pillar.png" alt="" class="w-[20%] h-auto">
+     </main>
+          
+          <script src="/scripts/index.js"></script>
+          <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+          <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
