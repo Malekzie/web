@@ -1,65 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Document</title>
-     <link rel="stylesheet" href="/output.css">
-     <link href="/custom-scrollbar.css" rel="stylesheet">
-</head>
-<body class="font-mono">
-     <nav class="flex justify-around">
-          <div class="z-50 p-2 mr-0 lg:hidden">
-               <ion-icon id="menu-open" name="menu-outline" size="large" class="text-blue-500"></ion-icon>
-               <ion-icon id="menu-closed" name="close-outline" class="hidden text-blue-500" size="large"></ion-icon>
-          </div>
-          <div id="navItems" class="h-screen w-[30%] bg-black text-white text-center pt-10 hidden absolute peer">
-               <div class="flex flex-col gap-5 text-lg">
-                    <a href="/">Home</a>
-                    <a href="/dragons">Dragons</a>
-                    <a href="/contact">Contact</a>
-               </div>
-          </div>
-          <div class="hidden w-full py-5 lg:flex lg:justify-between lg:pr-5">
-               <div class="hidden lg:block"></div>
-               <p class="text-3xl font-bold font-medieval">Dragons Sanctuary</p>
-               <div class="flex gap-10 text-2xl">
-                    <a class="transition-all hover:scale-110" href="/">Home</a>
-                    <a class="transition-all hover:scale-110" href="">Dragons</a>
-                    <a class="transition-all hover:scale-110" href="">Contact</a>
-               </div>
-          </div>
-     </nav>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Arcane Archives</title>
+		<link rel="stylesheet" href="/output.css" />
+	</head>
 
-     <main class="flex justify-between">
+	<body>
 
-          <img src="/img/pillar.png" alt="" class="w-[20%] h-auto">
-          <section class="h-full w-[60%] border border-black rounded-xl bg-gradient-to-b from-[#ffec9e] via-[#ffdd8a] to-[#e1ad6d]">
-               <div class="h-[89vh] m-3 font-medieval overflow-y-auto scrollbar-custom">
-                    <p class="h-[89vh]">Scroll inside this container. The scroll will be trapped here.</p>
-                    <p>More content...</p>
-                    <p>Even more content...</p>
-                    <p>Keep scrolling...</p>
-                    <p>Even more content...</p>
-                    <p>Keep scrolling...</p>
-                    <p>Even more content...</p>
-                    <p>Keep scrolling...</p>
-                    <p>Even more content...</p>
-                    <p>Keep scrolling...</p>
-                    <p>Even more content...</p>
-                    <p>Keep scrolling...</p>
-                    <p>Even more content...</p>
-                    <p>Keep scrolling...</p>
-                    <p>Even more content...</p>
-                    <p>Keep scrolling...</p>
-               </di>
-               
-          </section>
-          <img src="/img/pillar.png" alt="" class="w-[20%] h-auto">
-     </main>
-          
-          <script src="/scripts/index.js"></script>
-          <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-          <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-</body>
+          <!-- Navbar Start -->
+
+		<nav
+			class="block w-full max-w-screen-xl px-6 py-3 mx-auto text-black bg-white border shadow-md rounded-xl border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200"
+		>
+			<div
+				class="flex items-center justify-between text-blue-gray-900"
+			>
+				<a
+					href="/"
+					class="mr-4 block cursor-pointer py-1.5 font-sans text-base font-semibold leading-relaxed tracking-normal text-inherit antialiased"
+				>
+					Arcane Archives
+				</a>
+				<div id="nav" class="hidden lg:block">
+					<ul
+						class="flex flex-col gap-2 my-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6"
+					>
+						<li
+							class="block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900"
+						>
+							<a
+								href="/archives"
+								class="flex items-center transition-colors hover:text-blue-500"
+							>
+								Archives
+							</a>
+						</li>
+						<li
+							class="block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900"
+						>
+							<a
+								href="/auth/login"
+								class="flex items-center transition-colors hover:text-blue-500"
+							>
+								Account
+							</a>
+						</li>
+						<li
+							class="block p-1 font-sans text-sm antialiased font-medium leading-normal text-blue-gray-900"
+						>
+							<a
+								href="#"
+								class="flex items-center transition-colors hover:text-blue-500"
+							>
+								Contact
+							</a>
+						</li>
+
+					</ul>
+				</div>
+				<button
+					id="mobile-menu-button"
+					class="relative ml-auto h-6 max-h-[40px] w-6 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-inherit transition-all hover:bg-transparent focus:bg-transparent active:bg-transparent disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:hidden"
+					type="button"
+				>
+					<span
+						class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="2"
+							stroke="currentColor"
+							aria-hidden="true"
+							class="w-6 h-6"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+							></path>
+						</svg>
+					</span>
+				</button>
+			</div>
+		</nav>
+          <!-- Navbar End -->
+
+          <!-- Main Start -->
+		<main class="mx-[25vh]">
+
+               <!-- Hero Section -->
+			<section class="h-full m-10">
+				<div class="rounded-lg">
+					<div
+						class="w-full h-full p-3 text-center border border-gray-100 rounded-md bg-slate-500 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10"
+					>
+						<p>Welcome to the</p>
+						<span class="text-3xl font-bold"
+							>Arcane Archives</span
+						>
+					</div>
+				</div>
+
+				<div class="mt-32">
+					<div
+						class="w-full h-full p-3 text-xl bg-gray-400 border border-gray-100 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10"
+					>
+						<p class="text-center">
+							We are the only officially recognized
+							<span class="font-bold">Tome</span> and
+							<span class="font-bold">Grimoire</span>
+							distributer in the whole continent
+						</p>
+					</div>
+
+                         <!-- Card Section -->
+					<section
+						id="cards"
+						class="flex flex-wrap mt-32 justify-evenly"
+					>
+						<div
+							class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96"
+						>
+							<div
+								class="relative h-56 mx-4 mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40"
+							>
+								<img
+									class="object-contain w-full bg-center"
+									src="/img/basic-spell-tome"
+									alt="card-image"
+								/>
+							</div>
+							<div class="p-6">
+								<h5
+									class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"
+								>
+									Grimoir for Beginners
+								</h5>
+								<p
+									class="block font-sans text-base antialiased font-light leading-relaxed text-inherit"
+								>
+									The Grimoir for Beginners is a
+									collection of basic spells and
+									incantations for those new to the
+									arcane arts. It is perfect for
+									those looking to get started with
+									magic.
+								</p>
+							</div>
+							<div class="p-6 pt-0">
+								<button
+									class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+									type="button"
+								>
+									Read More
+								</button>
+							</div>
+						</div>
+
+						<div
+							class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96"
+						>
+							<div
+								class="relative h-56 mx-4 mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40"
+							>
+								<img
+									class="object-contain w-full bg-center"
+									src="/img/book-of-seven"
+									alt="card-image"
+								/>
+							</div>
+							<div class="p-6">
+								<h5
+									class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"
+								>
+									Seventh Book of Alteration
+								</h5>
+								<p
+									class="block font-sans text-base antialiased font-light leading-relaxed text-inherit"
+								>
+									The Seventh Book of Alteration is a
+									powerful tome that contains the
+									secrets of the arcane arts. It is
+									said to be able to alter reality
+									itself.
+								</p>
+							</div>
+							<div class="p-6 pt-0">
+								<button
+									class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+									type="button"
+								>
+									Read More
+								</button>
+							</div>
+						</div>
+
+						<div
+							class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96"
+						>
+							<div
+								class="relative h-56 mx-4 mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40"
+							>
+								<img
+									class="object-contain w-full bg-center"
+									src="/img/spell-of-time"
+									alt="card-image"
+								/>
+							</div>
+							<div class="p-6">
+								<h5
+									class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"
+								>
+									Spell of Time
+								</h5>
+								<p
+									class="block font-sans text-base antialiased font-light leading-relaxed text-inherit"
+								>
+									The Spell of Time is a powerful
+									spell that allows the caster to
+									manipulate time itself. It is said
+									to be able to slow down or speed up
+									time.
+								</p>
+							</div>
+							<div class="p-6 pt-0">
+								<button
+									class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+									type="button"
+								>
+									Read More
+								</button>
+							</div>
+						</div>
+					</section>
+				</div>
+			</section>
+
+               <!-- Card Section End -->
+
+
+               <!-- Author Section -->
+			<section class="h-screen">
+				<p class="text-white">Meet the Authors</p>
+				<div class="flex items-center justify-between">
+					<div
+						class="relative grid h-[40rem] w-full max-w-[28rem] flex-col items-end justify-center overflow-hidden rounded-xl bg-white bg-clip-border text-center text-gray-700"
+					>
+						<div
+							class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-[url('https://images.unsplash.com/photo-1552960562-daf630e9278b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80')] bg-cover bg-clip-border bg-center text-gray-700 shadow-none"
+						>
+							<div
+								class="absolute inset-0 w-full h-full to-bg-black-10 bg-gradient-to-t from-black/80 via-black/50"
+							></div>
+						</div>
+						<div class="relative p-6 px-6 py-14 md:px-12">
+							<h2
+								class="mb-6 block font-sans text-4xl font-medium leading-[1.5] tracking-normal text-white antialiased"
+							>
+								How we design and code open-source
+								projects?
+							</h2>
+							<h5
+								class="block mb-4 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-gray-400"
+							>
+								Tania Andrew
+							</h5>
+							<img
+								alt="Tania Andrew"
+								src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
+								class="relative inline-block h-[74px] w-[74px] !rounded-full border-2 border-white object-cover object-center"
+							/>
+						</div>
+					</div>
+
+					<div
+						class="relative grid h-[40rem] w-full max-w-[28rem] flex-col items-end justify-center overflow-hidden rounded-xl bg-white bg-clip-border text-center text-gray-700"
+					>
+						<div
+							class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-[url('https://images.unsplash.com/photo-1552960562-daf630e9278b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80')] bg-cover bg-clip-border bg-center text-gray-700 shadow-none"
+						>
+							<div
+								class="absolute inset-0 w-full h-full to-bg-black-10 bg-gradient-to-t from-black/80 via-black/50"
+							></div>
+						</div>
+						<div class="relative p-6 px-6 py-14 md:px-12">
+							<h2
+								class="mb-6 block font-sans text-4xl font-medium leading-[1.5] tracking-normal text-white antialiased"
+							>
+								How we design and code open-source
+								projects?
+							</h2>
+							<h5
+								class="block mb-4 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-gray-400"
+							>
+								Tania Andrew
+							</h5>
+							<img
+								alt="Tania Andrew"
+								src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
+								class="relative inline-block h-[74px] w-[74px] !rounded-full border-2 border-white object-cover object-center"
+							/>
+						</div>
+					</div>
+					<div
+						class="relative grid h-[40rem] w-full max-w-[28rem] flex-col items-end justify-center overflow-hidden rounded-xl bg-white bg-clip-border text-center text-gray-700"
+					>
+						<div
+							class="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-transparent bg-[url('https://images.unsplash.com/photo-1552960562-daf630e9278b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80')] bg-cover bg-clip-border bg-center text-gray-700 shadow-none"
+						>
+							<div
+								class="absolute inset-0 w-full h-full to-bg-black-10 bg-gradient-to-t from-black/80 via-black/50"
+							></div>
+						</div>
+						<div class="relative p-6 px-6 py-14 md:px-12">
+							<h2
+								class="mb-6 block font-sans text-4xl font-medium leading-[1.5] tracking-normal text-white antialiased"
+							>
+								How we design and code open-source
+								projects?
+							</h2>
+							<h5
+								class="block mb-4 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-gray-400"
+							>
+								Tania Andrew
+							</h5>
+							<img
+								alt="Tania Andrew"
+								src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
+								class="relative inline-block h-[74px] w-[74px] !rounded-full border-2 border-white object-cover object-center"
+							/>
+						</div>
+					</div>
+				</div>
+			</section>
+               <!-- Author Section End -->
+		</main>
+
+		<footer
+			class="flex flex-row flex-wrap items-center justify-center w-full py-6 text-center bg-white border-t -mt-11 gap-y-6 gap-x-12 border-blue-gray-50 md:justify-between"
+		>
+			<p
+				class="block font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900"
+			>
+				© 2024 Arcane Archives
+			</p>
+			<ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
+				<li>
+					<a
+						href="#"
+						class="block font-sans text-base antialiased font-normal leading-relaxed transition-colors text-blue-gray-900 hover:text-blue-500 focus:text-blue-500"
+					>
+						About Us
+					</a>
+				</li>
+				<li>
+					<a
+						href="#"
+						class="block font-sans text-base antialiased font-normal leading-relaxed transition-colors text-blue-gray-900 hover:text-blue-500 focus:text-blue-500"
+					>
+						License
+					</a>
+				</li>
+				<li>
+					<a
+						href="#"
+						class="block font-sans text-base antialiased font-normal leading-relaxed transition-colors text-blue-gray-900 hover:text-blue-500 focus:text-blue-500"
+					>
+						Contribute
+					</a>
+				</li>
+				<li>
+					<a
+						href="#"
+						class="block font-sans text-base antialiased font-normal leading-relaxed transition-colors text-blue-gray-900 hover:text-blue-500 focus:text-blue-500"
+					>
+						Contact Us
+					</a>
+				</li>
+			</ul>
+		</footer>
+
+		<!-- Scripts -->
+		<script defer src="/scripts/DOM.js"></script>
+		<script
+			defer
+               type="text/html"
+			src="/node_modules/@material-tailwind/html@latest/scripts/ripple.js"
+		></script>
+		<script
+			type="module"
+			src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+		></script>
+		<script
+			nomodule
+			src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+		></script>
+	</body>
 </html>

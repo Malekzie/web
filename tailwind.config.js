@@ -1,5 +1,7 @@
+const withMT = require("@material-tailwind/html/utils/withMT");
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+
+module.exports = withMT({
   content: [
     './src/views/**/*.{html, js}',
     './public/**/*.{css, js}'
@@ -14,5 +16,5 @@ module.exports = {
   plugins: [
     require('tailwind-scrollbar'),
   ],
-}
+})
 
