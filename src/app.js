@@ -27,7 +27,12 @@ app.get('/archives', (req, res) => {
 
 const authRouters = require('./modules/authRouter.js');
 app.use('/auth', authRouters);
+
+app.get('/contact', (req, res) => {
+     res.sendFile('/contact')
+});
 // Data Endpoints
+
 
 
 // Middleware
