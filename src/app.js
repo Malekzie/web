@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = 8000;
 const path = require('path');
+const bodyParser = require('body-parser');
 
 
 // Middleware to expose the static files 
@@ -13,6 +14,12 @@ app.use('/scripts', express.static(path.join(__dirname, '../public/scripts')));
 app.use('/img', express.static(path.join(__dirname, '../public/img'),
 {extensions: ['jpg', 'png']}));
 app.use('/fonts', express.static(path.join(__dirname, '../public/fonts')));
+app.use('/utils', express.static(path.join(__dirname, './utils')));
+
+
+// Middleware to parse request body
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 
