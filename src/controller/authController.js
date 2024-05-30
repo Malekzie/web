@@ -17,14 +17,18 @@ const register = async (req, res) => {
      const { passes, errors} = validate(data, rules);
 
      if (passes) {
-          authService.register(data)
-          .then(result => res.status(200).json({ message: 'User registered successfully', result}))
-          .catch(error => res.status(400).json({ error: error.message }));
+          try{
+               
+              await authService.register(data);
+              res.status(200).json({ message: 'User registered successfully' });
+          } catch (error) {
+               res.status(500).json({ error: 'Failed to register user. Something went wrong with your data' });
+          }
      } else {
           res.status(400).json({ errors });
      }
 }
-
+// TODO: 
 const login = async (req, res) => {
      const data = req.body;
      const rules = {
@@ -35,18 +39,17 @@ const login = async (req, res) => {
      const { passes, errors } = validate(data, rules);
 
      if (passes) {
-          authService.login(data)
-          .then(result => res.status(200).json({ message: 'User logged in successfully', result}))
-          .catch(error => res.status(400).json({ error: error.message }));
+          try{
+               const user = await authService.login(data);
+               res.status(200).json({ message: 'Login successful!', user });
+          } catch (error) {
+               res.status(401).json({ error: 'Invalid email or password. Please try again.' });
+          }
      } else {
-          res.status(400).json({ errors });
+          res.status(400).render('error', { error: errors.message });
      }
 }
 
-const requestAgentJSon = async (req, res) => {
-     const agents = await agentsRepository.findAgentJSON();
-     res.status(200).send(agents);
-}
 
 module.exports = {
      register,

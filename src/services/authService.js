@@ -22,17 +22,13 @@ const register = async (data) => {
 
 // Business Logic for logging in a user
 const login = async (data) => {
-     try {
-          const user = await authRepository.findUserByEmail(data.email);
-          if (!user) throw new Error('User not found');
+     const user = await userRepository.findUserByEmail(data.email);
+     if (!user) throw new Error('User not found');
   
-          const passwordMatch = await argon2.verify(user.password, data.password);
-          if (!passwordMatch) throw new Error('Invalid credentials');
+     const passwordMatch = await argon2.verify(user.password, data.password);
+     if (!passwordMatch) throw new Error('Invalid credentials');
   
-          return user;
-      } catch (error) {
-          throw new Error('Failed to login');
-      }
+     return user;   
 }
 
 
