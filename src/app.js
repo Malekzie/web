@@ -14,6 +14,8 @@ app.use('/scripts', express.static(path.join(__dirname, '../public/scripts')));
 app.use('/img', express.static(path.join(__dirname, '../public/img'),
 {extensions: ['jpg', 'png']}));
 app.use('/fonts', express.static(path.join(__dirname, '../public/fonts')));
+
+app.use('/repositories', express.static(path.join(__dirname, '../repositories'))),
 app.use('/utils', express.static(path.join(__dirname, './utils'),
 { extensions: ['js'] }));
 
