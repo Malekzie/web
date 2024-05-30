@@ -7,7 +7,7 @@ Stack used to make this:
 * Express
 * Prisma ORM
 
-
+# Add frontend tests using Puppeteer and Jest or Mocha for Backend tests
 
 ### Author
 Robbie Soriano
@@ -58,7 +58,7 @@ my-express-app/
 └── README.md
 ```
 
-# Explaination
+# Explaination of File Structure
 
 Starting from root level, we got **node modules**, **public** and **src**
 * Node modules are made by npm, not much explaination needed
