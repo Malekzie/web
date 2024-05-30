@@ -1,6 +1,8 @@
+require('dotenv').config();
 const authService = require('../services/authService');
-const agentsRepository = require('../repositories/agentsRepository');
 const validate = require('../utils/validationUtil');
+const tokenUtils = require('../utils/tokensUtils');
+const jwt = require('jsonwebtoken');
 
 // Controller Method for registering a user
 const register = async (req, res) => {
@@ -20,15 +22,15 @@ const register = async (req, res) => {
           try{
                
               await authService.register(data);
-              res.status(200).json({ message: 'User registered successfully' });
+              res.redirect(301, '/auth/login')
           } catch (error) {
-               res.status(500).json({ error: 'Failed to register user. Something went wrong with your data' });
+              res.redirect(500, '/auth/register')
           }
      } else {
           res.status(400).json({ errors });
      }
 }
-// TODO: 
+
 const login = async (req, res) => {
      const data = req.body;
      const rules = {
@@ -41,17 +43,21 @@ const login = async (req, res) => {
      if (passes) {
           try{
                const user = await authService.login(data);
-               res.status(200).json({ message: 'Login successful!', user });
+
+              const accessToken =  tokenUtils.generateAccessToken(user);
+              
+               res.redirect(301, '/auth/profile')
           } catch (error) {
                res.status(401).json({ error: 'Invalid email or password. Please try again.' });
           }
      } else {
           res.status(400).render('error', { error: errors.message });
      }
+
 }
 
 
 module.exports = {
      register,
-     login
+     login,
 }

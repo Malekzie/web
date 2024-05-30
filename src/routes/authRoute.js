@@ -11,6 +11,11 @@ authRouter.get('/register', (req, res) => {
      res.sendFile('/register')
 });
 
+
+authRouter.get('/profile', (req, res) => {
+     res.sendFile('/profile')
+});
+
 authRouter.get('/json', async (req, res) => {
      const agents = await agentsRepository.findAgentJSON();
      res.status(200).json( agents );
