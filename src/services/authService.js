@@ -2,37 +2,37 @@ const userRepository = require('../repositories/userRepository');
 const argon2 = require('argon2');
 
 // Business Logic for registering a user
-const register = async (email, password) => {
+const register = async (data) => {
      // Check if user already exists
-     const existingUser = await userRepository.findUserByEmail(email);
+     const hashedPassword = await argon2.hash(data.password);
+     const existingUser = await userRepository.findUserByEmail(data.email);
+
      if (existingUser) {
           throw new Error('User already exists');
      }
+     const userData = {
+          name: data.name,
+          email: data.email,
+          password: hashedPassword,
+      };
 
-     // Hash the password before sending it to the database
-     const hashedPassword = await argon2.hash(password);
-
-     const user = await userRepository.createUser({
-          email,
-          password: hashedPassword
-     });
-
-     return user;
+      return userRepository.createUser(userData);
 }
 
+
 // Business Logic for logging in a user
-const login = async (email, password) => {
-     const user = await userRepository.findUserByEmail(email);
-     if (!user) {
-          throw new Error('Invalid credentials');
-     }
-
-     const passwordMatch = await argon2.verify(user.password, password);
-     if (!passwordMatch) {
-          throw new Error('Invalid credentials');
-     }
-
-     return user;
+const login = async (data) => {
+     try {
+          const user = await authRepository.findUserByEmail(data.email);
+          if (!user) throw new Error('User not found');
+  
+          const passwordMatch = await argon2.verify(user.password, data.password);
+          if (!passwordMatch) throw new Error('Invalid credentials');
+  
+          return user;
+      } catch (error) {
+          throw new Error('Failed to login');
+      }
 }
 
 
