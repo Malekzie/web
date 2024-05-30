@@ -14,7 +14,8 @@ app.use('/scripts', express.static(path.join(__dirname, '../public/scripts')));
 app.use('/img', express.static(path.join(__dirname, '../public/img'),
 {extensions: ['jpg', 'png']}));
 app.use('/fonts', express.static(path.join(__dirname, '../public/fonts')));
-app.use('/utils', express.static(path.join(__dirname, './utils')));
+app.use('/utils', express.static(path.join(__dirname, './utils'),
+{ extensions: ['js'] }));
 
 
 // Middleware to parse request body
@@ -32,7 +33,7 @@ app.get('/archives', (req, res) => {
      res.sendFile('/archives')
 });
 
-const authRouters = require('./modules/authRouter.js');
+const authRouters = require('./routes/authRoute.js');
 app.use('/auth', authRouters);
 
 app.get('/contact', (req, res) => {
@@ -42,8 +43,9 @@ app.get('/contact', (req, res) => {
 
 
 
-// Middleware
-
+app.all('*', (req, res) => {
+     res.status(404).sendFile(path.resolve(__dirname, 'views', '404.html'))
+});
 
 app.listen(port, () => {
      console.log(`Server is running on http://localhost:${port} ...`);
