@@ -3,7 +3,7 @@ const withMT = require("@material-tailwind/html/utils/withMT");
 
 module.exports = withMT({
   content: [
-    './src/views/**/*.{html, js}',
+    './src/views/**/*.{html, js, ejs}',
     './public/**/*.{css, js}'
   ],
   theme: {

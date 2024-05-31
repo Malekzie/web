@@ -16,7 +16,7 @@ authRouter.get('/register', (req, res) => {
 // Serve profile page and redirect to login page if not logged in
 authRouter.get('/profile', (req, res) => {
      if (req.session.loggedIn) {
-          res.render('profile');
+          res.redirect('/auth/profile');
         } else {
           res.redirect('/auth/login');
         }

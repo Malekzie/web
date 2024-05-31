@@ -3,7 +3,16 @@ const db = new PrismaClient();
 
 
 const findAgent = async () => {
-     const agents = await db.agents.findMany();
+     const agents = await db.agents.findMany({
+          select: {
+               image: true,
+               name: true,
+               position: true,
+               email: true,
+               phone: true,
+               address: true
+          }
+     });
      return agents;
 }
 

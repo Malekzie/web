@@ -7,17 +7,17 @@ const session = require('express-session');
 
 // Middleware to expose the static files 
 app.use(express.static(path.join(__dirname, 'views'),
-{extensions: ['html']}));
+     { extensions: ['html'] }));
 app.use(express.static(path.join(__dirname, 'styles')));
-app.use('/node_modules',express.static(path.join(__dirname, 'node_modules')));
+app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 app.use('/scripts', express.static(path.join(__dirname, '../public/scripts')));
 app.use('/img', express.static(path.join(__dirname, '../public/img'),
-{extensions: ['jpg', 'png']}));
+     { extensions: ['jpg', 'png'] }));
 app.use('/fonts', express.static(path.join(__dirname, '../public/fonts')));
 
 app.use('/repositories', express.static(path.join(__dirname, '../repositories'))),
-app.use('/utils', express.static(path.join(__dirname, './utils'),
-{ extensions: ['js'] }));
+     app.use('/utils', express.static(path.join(__dirname, './utils'),
+          { extensions: ['js'] }));
 
 
 // Middleware to parse request body
@@ -42,7 +42,7 @@ app.set('views', __dirname + '/views');
 app.use((req, res, next) => {
      res.locals.loggedIn = req.session.loggedIn || false;
      next();
-   });
+});
 
 
 // Routes
@@ -57,8 +57,15 @@ app.get('/archives', (req, res) => {
 const authRouters = require('./routes/authRoute.js');
 app.use('/auth', authRouters);
 
-app.get('/contact', (req, res) => {
-     res.sendFile('/contact')
+
+const agentsRepository = require('./repositories/agentsRepository');
+app.get('/contact', async (req, res) => {
+     try {
+          const agents = await agentsRepository.findAgent();
+          res.render('contact', { agents })
+     } catch (error) {
+          res.status(500).send('Error retrieving agents data. Please try again later.');
+     }
 });
 
 // Data Endpoints
