@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["omitApi"]
 }
 
@@ -9,20 +9,38 @@ datasource db {
 }
 
 model user {
-  id       String @id @default(uuid())
-  email    String @unique(map: "User_email_key")
-  name     String
+  id       String    @id @default(uuid())
+  email    String    @unique(map: "User_email_key")
+  name     String?
   password String
+  records  records[]
 }
 
-model Agents {
-  id        String   @id @default(uuid())
-  image     String?
+model agents {
+  id        String    @id @default(uuid())
+  image     String
   name      String
-  position  String
   email     String
   phone     String
   address   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  position  String
+  records   records[]
+}
+
+model records {
+  id        String   @id
+  author    String
+  title     String?
+  content   String?
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime
+  userId    String?
+  agentId   String?
+  agents    agents?  @relation(fields: [agentId], references: [id], map: "Records_agentId_fkey")
+  user      user?    @relation(fields: [userId], references: [id], map: "Records_userId_fkey")
+
+  @@index([agentId], map: "Records_agentId_fkey")
+  @@index([userId], map: "Records_userId_fkey")
 }

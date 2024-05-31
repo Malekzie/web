@@ -1,8 +1,7 @@
 require('dotenv').config();
 const authService = require('../services/authService');
 const validate = require('../utils/validationUtil');
-const tokenUtils = require('../utils/tokensUtils');
-const jwt = require('jsonwebtoken');
+
 
 // Controller Method for registering a user
 const register = async (req, res) => {
@@ -42,16 +41,14 @@ const login = async (req, res) => {
 
      if (passes) {
           try{
-               const user = await authService.login(data);
-
-              const accessToken =  tokenUtils.generateAccessToken(user);
-              
-               res.redirect(301, '/auth/profile')
+               await authService.login(data);
+               req.session.loggedIn = true;              
+               res.redirect(300, '/auth/profile')
           } catch (error) {
                res.status(401).json({ error: 'Invalid email or password. Please try again.' });
           }
      } else {
-          res.status(400).render('error', { error: errors.message });
+          res.status(400).json({ error: errors.message });
      }
 
 }

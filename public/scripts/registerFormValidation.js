@@ -1,40 +1,47 @@
-document.addEventListener('DOMContentLoaded', async () => {
-
+document.addEventListener('DOMContentLoaded', () => {
      const form = document.querySelector('form');
-
-
-     form.addEventListener('submit', async (e) => {
-          e.preventDefault();
-
-          const formData = new FormData(form);
-          const formDataJson = JSON.stringify(Object.fromEntries(formData.entries()));
-
-          const response = await fetch('/auth/register', {
-               method: 'POST',
-               headers: {
-                    'Content-Type': 'application/json'
-               },
-               body: formDataJson
-          });
-
-          const responseData = await response.json();
-
-          document.querySelectorAll('.error-message').forEach(el => el.innerText = '');
-
-          
-          if (response.status === 400 && responseData.errors) {
-               Object.keys(responseData.errors).forEach(field => {
-                    const errorMessage = responseData.errors[field][0];
-                    const errorElement = document.getElementById(`${field}-error`);
-                    if (errorElement) {
-                         errorElement.innerText = errorMessage;
-                    }
-               });
-          } else if (response.status === 500 && responseData.error) {
-               alert(responseData.error);
-          } else if (response.status === 200 && responseData.message) {
-               alert(responseData.message);
-               form.reset(); // Optionally reset the form on successful registration
-          }
+     form.addEventListener('submit', async (event) => {
+         event.preventDefault();
+ 
+         const formData = new FormData(form);
+         const formDataJson = JSON.stringify(Object.fromEntries(formData.entries()));
+ 
+         try {
+             const response = await fetch(form.action, {
+                 method: form.method,
+                 headers: {
+                     'Content-Type': 'application/json'
+                 },
+                 body: formDataJson
+             });
+ 
+             if (response.ok) {
+                 const result = await response.json();
+                 console.log('Success:', result);
+                 // handle successful registration, e.g., redirect to login page
+             } else {
+                 const errorData = await response.json();
+                 console.error('Error:', errorData);
+                 displayErrors(errorData);
+             }
+         } catch (error) {
+             console.error('Network error:', error);
+             // handle network errors
+         }
      });
-});
+ 
+     function displayErrors(errors) {
+         const errorFields = ['name', 'email', 'password', 'confirmPassword'];
+         errorFields.forEach(field => {
+             const errorDiv = document.getElementById(`${field}-error`);
+             if (errors[field]) {
+                 errorDiv.textContent = errors[field];
+                 errorDiv.style.display = 'block';
+             } else {
+                 errorDiv.textContent = '';
+                 errorDiv.style.display = 'none';
+             }
+         });
+     }
+ });
+ 
